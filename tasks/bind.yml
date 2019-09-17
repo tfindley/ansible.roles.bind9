@@ -1,0 +1,48 @@
+---
+# tasks file for rpsetup:bind
+
+- name: BIND - Install/Update apt package
+  apt:
+    name: bind9
+  when: inventory_hostname in groups['bind']
+
+
+- name: BIND - Enable Service
+  service:
+    name: bind9
+    enabled: yes
+  when: inventory_hostname in groups['bind']
+
+
+- name: BIND - Create conf.local file from a template
+  template:
+    src: etc/bind/named.conf.local
+    dest: /etc/bind/named.conf.local
+    owner: root
+    group: root
+    mode: 0644
+  notify: BIND Restart
+  when: inventory_hostname in groups['bind']
+
+
+- name: BIND - Create conf.options file from a template
+  template:
+    src: etc/bind/named.conf.options
+    dest: /etc/bind/named.conf.options
+    owner: root
+    group: root
+    mode: 0644
+  notify: BIND Restart
+  when: inventory_hostname in groups['bind']
+
+
+- name: BIND - Copy Zone files
+  copy:
+    src: etc/bind/zones/
+    dest: /etc/bind/zones/
+    owner: root
+    group: root
+    mode: 0644
+    directory_mode: 2755
+  notify: BIND Restart
+  when: inventory_hostname in groups['bind']

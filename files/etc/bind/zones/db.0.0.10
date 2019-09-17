@@ -1,0 +1,49 @@
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	core1.home. admin.core1.home. (
+			      3		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+
+; name servers - NS records
+		IN		NS		core1.home.
+		IN		NS		core2.home.
+
+; PTR recrds
+13		IN		PTR		gateway.home.		;	10.0.0.1
+13		IN		PTR		sw0.home.			;	10.0.0.2
+13		IN		PTR		sw1.home.			;	10.0.0.3
+13		IN		PTR		ap1.home.			;	10.0.0.8
+13		IN		PTR		ap0.home.			;	10.0.0.9
+
+13		IN		PTR		spark.home			;	10.0.0.10
+13		IN		PTR		core1.home.			;	10.0.0.11
+13		IN		PTR		core2.home.			;	10.0.0.12
+13		IN		PTR		wolf.home.			;	10.0.0.13
+13		IN		PTR		forge.home.			;	10.0.0.14
+
+13		IN		PTR		fox.home.			;	10.0.0.20
+
+13		IN		PTR		pro10s.home.		;	10.0.0.21
+13		IN		PTR		cp1515n.home.		;	10.0.0.22
+
+13		IN		PTR		ghh-den.home.		;	10.0.0.240
+13		IN		PTR		gca-den.home.		;	10.0.0.241
+13		IN		PTR		gca-lodge.home.		;	10.0.0.242
+13		IN		PTR		gcc-office.home.	;	10.0.0.243
+13		IN		PTR		aed-den.home.		;	10.0.0.245
+13		IN		PTR		ae-gardenr.home.	;	10.0.0.246
+13		IN		PTR		ae-kitchen.home.	;	10.0.0.247
+13		IN		PTR		afb-mum.home.		;	10.0.0.248
+13		IN		PTR		afb-guest.home.		;	10.0.0.249
+
+13		IN		PTR		hdhr.home.			;	10.0.0.250
+13		IN		PTR		pbx.home.			;	10.0.0.251
+13		IN		PTR		hue.home.			;	10.0.0.252
+13		IN		PTR		hive.home.			;	10.0.0.253
+13		IN		PTR		solar.home.			;	10.0.0.254

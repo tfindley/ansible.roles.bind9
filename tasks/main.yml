@@ -1,0 +1,4 @@
+---
+# tasks file for dns
+- include_tasks: bind.yml
+  when: inventory_hostname in groups['bind'] and ansible_os_family == "Debian"
