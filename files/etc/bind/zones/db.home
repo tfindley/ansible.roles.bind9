@@ -24,12 +24,20 @@ ap1			IN		A		10.0.0.8
 ap0			IN		A		10.0.0.9
 
 ;	A records - Servers
-spark		IN		A		10.0.0.10
+core		IN		A		10.0.0.10
 core1		IN		A		10.0.0.11
 core2		IN		A		10.0.0.12
 wolf		IN		A		10.0.0.13
 forge		IN		A		10.0.0.14
 forge-ilo	IN		A		10.0.0.15
+vss			IN		A		10.0.0.16
+vss-ilo		IN		A		10.0.0.17
+
+;	A records - Virtual Servers
+devgw		IN		A		10.0.0.40
+git			IN		A		10.0.0.41
+vssgw		IN		A		10.0.0.42
+
 
 ;	A records - Control Station
 fox			IN		A		10.0.0.20

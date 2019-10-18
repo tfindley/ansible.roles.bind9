@@ -14,7 +14,7 @@ $TTL	604800
 			IN		NS		core1.findley.pm.
 
 ;	name servers - A records
-spark		IN		A		10.0.0.10
+core		IN		A		10.0.0.10
 core1		IN		A		10.0.0.11
 core2		IN		A		10.0.0.12
 wolf		IN		A		10.0.0.13
