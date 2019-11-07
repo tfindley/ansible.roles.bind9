@@ -9,16 +9,16 @@
 //include "/etc/bind/zones.rfc1918";
 
 zone "home"			{
-{% if 'bind-master' in group_names %}
+{% if 'bind_master' in group_names %}
 			type master;
 			file "/etc/bind/zones/db.home";
-			allow-transfer { {% for host in groups['bind-slave'] -%}
+			allow-transfer { {% for host in groups['bind_slave'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };
 {% else %}
 			type slave;
 			file "/etc/bind/zones/db.home";
-			masters { {% for host in groups['bind-master'] -%}
+			masters { {% for host in groups['bind_master'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };		# ns1 private IP
 {% endif %}
@@ -26,16 +26,16 @@ zone "home"			{
 
 
 zone "findley.pm"		{
-{% if 'bind-master' in group_names %}
+{% if 'bind_master' in group_names %}
 			type master;
 			file "/etc/bind/zones/db.findley.pm";
-			allow-transfer { {% for host in groups['bind-slave'] -%}
+			allow-transfer { {% for host in groups['bind_slave'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };
 {% else %}
 			type slave;
 			file "/etc/bind/zones/db.findley.pm";
-			masters { {% for host in groups['bind-master'] -%}
+			masters { {% for host in groups['bind_master'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };		# ns1 private IP
 {% endif %}
@@ -44,16 +44,16 @@ zone "findley.pm"		{
 
 
 zone "0.0.10.in-addr.arpa"	{
-{% if 'bind-master' in group_names %}
+{% if 'bind_master' in group_names %}
 			type master;
 			file "/etc/bind/zones/db.0.0.10";
-			allow-transfer { {% for host in groups['bind-slave'] -%}
+			allow-transfer { {% for host in groups['bind_slave'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };
 {% else %}
 			type slave;
 			file "/etc/bind/zones/db.0.0.10";
-			masters { {% for host in groups['bind-master'] -%}
+			masters { {% for host in groups['bind_master'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };		# ns1 private IP
 {% endif %}
