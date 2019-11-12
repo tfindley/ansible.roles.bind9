@@ -13,16 +13,12 @@ $TTL	604800
 ;	name servers - NS records
 			IN		NS		core1.findley.pm.
 
-;	name servers - A records
-core		IN		A		10.0.0.10
-core1		IN		A		10.0.0.11
-core2		IN		A		10.0.0.12
-wolf		IN		A		10.0.0.13
-forge		IN		A		10.0.0.14
-git			IN		A		10.0.0.41
+;	A records - Infrastructure
+{% for line in clients_reserved %}
+{{line.hostname}}			IN			A			{{line.IP}}
+{% endfor %}
 
 ;	CNAME Records
-
-filestore 	IN		CNAME	wolf.findley.pm.
-monitor		IN		CNAME	wolf.findley.pm.
-bookstack	IN		CNAME	wolf.findley.pm.
+{% for line in dns_extzone_cname %}
+{{line.from}}				IN			CNAME		{{line.to}}.{{dns_extzone}}.
+{% endfor %}

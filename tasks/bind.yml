@@ -36,13 +36,32 @@
   when: inventory_hostname in groups['bind']
 
 
-- name: BIND - Copy Zone files
-  copy:
-    src: etc/bind/zones/
-    dest: /etc/bind/zones/
+- name: BIND - Create Internal Zone file from template
+  template:
+    src: etc/bind/zones/db.home
+    dest: /etc/bind/zones/db.home
     owner: root
     group: root
     mode: 0644
-    directory_mode: 2755
+  notify: BIND Restart
+  when: inventory_hostname in groups['bind']
+
+- name: BIND - Create External Zone file from template
+  template:
+    src: etc/bind/zones/db.findley.pm
+    dest: /etc/bind/zones/db.findley.pm
+    owner: root
+    group: root
+    mode: 0644
+  notify: BIND Restart
+  when: inventory_hostname in groups['bind']
+
+- name: BIND - Create PTR Zone file from template
+  template:
+    src: etc/bind/zones/db.0.0.10
+    dest: /etc/bind/zones/db.0.0.10
+    owner: root
+    group: root
+    mode: 0644
   notify: BIND Restart
   when: inventory_hostname in groups['bind']
