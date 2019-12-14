@@ -1,5 +1,4 @@
 // This file is {{ ansible_managed }}.
-// Last Pushed on {{ ansible_date_time.date }}
 //
 
 acl "trusted"	{
