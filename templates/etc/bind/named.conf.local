@@ -7,33 +7,16 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
-zone "home"			{
+zone "{{dns_zone}}"		{
 {% if 'bind_master' in group_names %}
 			type master;
-			file "/etc/bind/zones/db.home";
+			file "/etc/bind/zones/db.{{dns_zone}}";
 			allow-transfer { {% for host in groups['bind_slave'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };
 {% else %}
 			type slave;
-			file "/etc/bind/zones/db.home";
-			masters { {% for host in groups['bind_master'] -%}
-								{{ hostvars[host].ansible_default_ipv4.address }};
-								{%- endfor %} };		# ns1 private IP
-{% endif %}
-			};
-
-
-zone "findley.pm"		{
-{% if 'bind_master' in group_names %}
-			type master;
-			file "/etc/bind/zones/db.findley.pm";
-			allow-transfer { {% for host in groups['bind_slave'] -%}
-								{{ hostvars[host].ansible_default_ipv4.address }};
-								{%- endfor %} };
-{% else %}
-			type slave;
-			file "/etc/bind/zones/db.findley.pm";
+			file "/etc/bind/zones/db.{{dns_zone}}";
 			masters { {% for host in groups['bind_master'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };		# ns1 private IP
@@ -42,16 +25,16 @@ zone "findley.pm"		{
 
 
 
-zone "0.0.10.in-addr.arpa"	{
+zone "{{ansible_default_ipv4.network | ipaddr('revdns')}}" {
 {% if 'bind_master' in group_names %}
 			type master;
-			file "/etc/bind/zones/db.0.0.10";
+			file "/etc/bind/zones/db.reverse";
 			allow-transfer { {% for host in groups['bind_slave'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };
 {% else %}
 			type slave;
-			file "/etc/bind/zones/db.0.0.10";
+			file "/etc/bind/zones/db.reverse";
 			masters { {% for host in groups['bind_master'] -%}
 								{{ hostvars[host].ansible_default_ipv4.address }};
 								{%- endfor %} };		# ns1 private IP

@@ -1,0 +1,4 @@
+package_install:
+- bind
+
+bind_service: named

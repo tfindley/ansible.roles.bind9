@@ -1,0 +1,4 @@
+package_install:
+- bind9
+
+bind_service: bind9

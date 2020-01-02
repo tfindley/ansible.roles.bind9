@@ -3,6 +3,5 @@
 
 - name: BIND Restart
   service:
-    name: bind9
+    name: "{{bind_service}}"
     state: restarted
-  when: inventory_hostname in groups['bind']

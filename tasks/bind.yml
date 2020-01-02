@@ -2,14 +2,16 @@
 # tasks file for rpsetup:bind
 
 - name: BIND - Install/Update apt package
-  apt:
-    name: bind9
+  package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{package_install}}"
   when: inventory_hostname in groups['bind']
 
 
 - name: BIND - Enable Service
   service:
-    name: bind9
+    name: "{{bind_service}}"
     enabled: yes
   when: inventory_hostname in groups['bind']
 
@@ -36,30 +38,20 @@
   when: inventory_hostname in groups['bind']
 
 
-- name: BIND - Create Internal Zone file from template
+- name: BIND - Deploy new test files to root home
   template:
-    src: etc/bind/zones/db.home
-    dest: /etc/bind/zones/db.home
+    src: etc/bind/zones/db.zone
+    dest: "/etc/bind/zones/db.{{dns_zone}}"
     owner: root
     group: root
     mode: 0644
   notify: BIND Restart
   when: inventory_hostname in groups['bind']
 
-- name: BIND - Create External Zone file from template
+- name: BIND - Deploy new test files to root home
   template:
-    src: etc/bind/zones/db.findley.pm
-    dest: /etc/bind/zones/db.findley.pm
-    owner: root
-    group: root
-    mode: 0644
-  notify: BIND Restart
-  when: inventory_hostname in groups['bind']
-
-- name: BIND - Create PTR Zone file from template
-  template:
-    src: etc/bind/zones/db.0.0.10
-    dest: /etc/bind/zones/db.0.0.10
+    src: etc/bind/zones/db.reverse
+    dest: /etc/bind/zones/db.reverse
     owner: root
     group: root
     mode: 0644
