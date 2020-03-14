@@ -1,4 +1,5 @@
 package_install:
 - bind9
+- dnsutils
 
 bind_service: bind9
