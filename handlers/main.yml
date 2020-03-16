@@ -3,5 +3,5 @@
 
 - name: BIND Restart
   service:
-    name: "{{bind_service}}"
+    name: "{{ bind_service }}"
     state: restarted

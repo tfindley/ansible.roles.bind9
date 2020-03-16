@@ -3,15 +3,15 @@
 
 - name: BIND - Install/Update apt package
   package:
-    name: "{{item}}"
+    name: "{{ item }}"
     state: present
-  with_items: "{{package_install}}"
+  with_items: "{{ package_install }}"
   when: inventory_hostname in groups['bind']
 
 
 - name: BIND - Enable Service
   service:
-    name: "{{bind_service}}"
+    name: "{{ bind_service }}"
     enabled: yes
   when: inventory_hostname in groups['bind']
 
@@ -41,7 +41,7 @@
 - name: BIND - Deploy new test files to root home
   template:
     src: etc/bind/zones/db.zone.j2
-    dest: "/etc/bind/zones/db.{{dns_zone}}"
+    dest: "/etc/bind/zones/db.{{ dns_zone }}"
     owner: root
     group: root
     mode: 0644
