@@ -37,6 +37,14 @@
   notify: BIND Restart
   when: inventory_hostname in groups['bind']
 
+- name: BIND - Create zones directory
+  file:
+    path: "/etc/bind/zones"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when: inventory_hostname in groups['bind']
 
 - name: BIND - Deploy new test files to root home
   template:
