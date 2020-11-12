@@ -39,5 +39,5 @@ options			{
 	listen-on		{ {{ ansible_default_ipv4.address }}; };		# private IP Address
 	listen-on-v6		{ any; };
 	allow-transfer		{ none; };			# Disable zone transfer by default
-
+	allow-query			{ {{ip_network}}/{{ip_cidr}};	10.252.0.0/24; };
 	};
